@@ -56,7 +56,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          .wrapper {
          background-color: ${colors[data.color].wrapperBackground};
          padding-top: 100px;
-         height: 30%; 
+         height: 25%; 
          }
          body {
          background-color: white;
@@ -67,6 +67,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          background-color: #E9EDEE;
          height: auto;
          padding-top: 30px;
+         height: 50%; 
          }
          h1, h2, h3, h4, h5, h6 {
          font-family: 'BioRhyme', serif;
@@ -101,7 +102,8 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          background-color: ${colors[data.color].headerBackground};
          color: ${colors[data.color].headerColor};
          padding: 10px;
-         width: 95%;
+         width: 85%;
+         height: 500px; 
          border-radius: 6px;
          }
          .photo-header img {
@@ -172,13 +174,15 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          }
 
          .bottom{
-          position: relative;
-          top: -5%; 
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
          }
 
          @media print { 
           body { 
-            zoom: .75; 
+            zoom: .77; 
           } 
          }
       </style>

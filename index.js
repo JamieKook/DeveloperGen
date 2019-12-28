@@ -8,7 +8,7 @@ const conversion = convertFactory({
 }); 
 
 // //enter your googleAPI account here:
-// const googleAPI="";  
+const googleAPI=;  
 
 //global variables
 let imageUrl= null; 
@@ -51,32 +51,43 @@ inquirer
          followers = res.data.followers; 
          following= res.data.following;
          name= res.data.name; 
-         console.log(blog); 
-          
+         console.log(location);
+         const geolocateurl= `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${googleAPI}`;
+         console.log(geolocateurl); 
+
          axios
-          .get(queryUrl+"/starred")
-          .then(function(res){
-            stars=res.data.length;
-            // const locationUrl= `https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=14&size=400x400&key=${googleAPI}`; 
-            const htmlData= generateHTML.generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_repos, followers, stars, following);
-            conversion({html: htmlData, delay: 1000}, function(err, result){
-                if (err){
-                  return console.log(err); 
-                } 
-                console.log(result.numberOfPages); 
-                console.log(result.logs); 
-                result.stream.pipe(fs.createWriteStream(username+".pdf"));
-                conversion.kill(); 
-                });
-              fs.writeFile(username+".html", htmlData, function(err){
-                if (err){
-                  console.log(err);
-                } else{
-                  console.log("success"); 
-                  const htmlFile= fs.readFileSync(username+".html", "utf8");
-                }
-              });       
-          }); 
+          .get(geolocateurl)
+          .then(function(response){
+            console.log(response.data.results[0].geometry); 
+            const lat= response.data.results[0].geometry.location.lat;
+            const lng= response.data.results[0].geometry.location.lng;
+            console.log(lat, lng); 
+
+            axios
+            .get(queryUrl+"/starred")
+            .then(function(res){
+              stars=res.data.length;
+              const locationUrl= `https://www.google.com/maps/@?api=1&map_action=map&center=${lat},${lng}&zoom=14`;
+              const htmlData= generateHTML.generateHTML(data,imageUrl,location, locationUrl, html_url, blog, name, bio, public_repos, followers, stars, following);
+              conversion({html: htmlData, delay: 1000}, function(err, result){
+                  if (err){
+                    return console.log(err); 
+                  } 
+                  console.log(result.numberOfPages); 
+                  // console.log(result.logs); 
+                  result.stream.pipe(fs.createWriteStream(username+".pdf"));
+                  conversion.kill(); 
+                  });
+                fs.writeFile(username+".html", htmlData, function(err){
+                  if (err){
+                    console.log(err);
+                  } else{
+                    console.log("success"); 
+                    const htmlFile= fs.readFileSync(username+".html", "utf8");
+                  }
+                });       
+            }); 
+          });
       });
   }) 
 

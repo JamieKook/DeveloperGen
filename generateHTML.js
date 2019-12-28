@@ -25,7 +25,7 @@ const colors = {
   }
 };
 
-function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_repos, followers, stars, following) {
+function generateHTML(data,imageUrl,location, locationUrl, html_url, blog, name, bio, public_repos, followers, stars, following) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -180,7 +180,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
           bottom: 0;
           width: 100%;
          }
-         
+
          i {
           margin-left: 20px; 
         }
@@ -200,7 +200,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
             <h1>Hi!</h1>
             <h2>My name is ${name}!</h2>
             <div class="nav-link">
-              <i class="fas fa-location-arrow"></i> <a class="links-nav m-2" target="_blank" href="locationURL">${location}</a>
+              <i class="fas fa-location-arrow"></i> <a class="links-nav m-2" target="_blank" href="${locationUrl}">${location}</a>
               <i class="fab fa-github-alt"></i> <a class="links-nav m-2" target="_blank" href="${html_url}">GitHub</a>
               <i class="fas fa-rss"></i> <a class="links-nav m-2" target="_blank" href="https://${blog}">Blog</a>
             </div>

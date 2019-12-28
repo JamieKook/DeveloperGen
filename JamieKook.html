@@ -1,32 +1,4 @@
-const colors = {
-  green: {
-    wrapperBackground: "#E6E1C3",
-    headerBackground: "#C1C72C",
-    headerColor: "black",
-    photoBorderColor: "black"
-  },
-  blue: {
-    wrapperBackground: "#5F64D3",
-    headerBackground: "#26175A",
-    headerColor: "white",
-    photoBorderColor: "#73448C"
-  },
-  pink: {
-    wrapperBackground: "#879CDF",
-    headerBackground: "#FF8374",
-    headerColor: "white",
-    photoBorderColor: "#FEE24C"
-  },
-  red: {
-    wrapperBackground: "#DE9967",
-    headerBackground: "#870603",
-    headerColor: "white",
-    photoBorderColor: "white"
-  }
-};
-
-function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_repos, followers, stars, following) {
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -55,7 +27,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[data.color].wrapperBackground};
+         background-color: #5F64D3;
          padding-top: 100px;
          height: 25%; 
          }
@@ -100,8 +72,8 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[data.color].headerBackground};
-         color: ${colors[data.color].headerColor};
+         background-color: #26175A;
+         color: white;
          padding: 10px;
          width: 85%;
          height: 500px; 
@@ -113,7 +85,7 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[data.color].photoBorderColor};
+         border: 6px solid #73448C;
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -158,8 +130,8 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[data.color].headerBackground};
-           color: ${colors[data.color].headerColor};
+           background-color: #26175A;
+           color: white;
            margin: 20px;
          }
          
@@ -196,44 +168,38 @@ function generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_
         <div class="wrapper">
         </div>
         <div class="photo-header">
-            <img src="${imageUrl}">
+            <img src="https://avatars0.githubusercontent.com/u/55645655?v=4">
             <h1>Hi!</h1>
-            <h2>My name is ${name}!</h2>
+            <h2>My name is Jamie Kook!</h2>
             <div class="nav-link">
-              <i class="fas fa-location-arrow"></i> <a class="links-nav m-2" target="_blank" href="locationURL">${location}</a>
-              <i class="fab fa-github-alt"></i> <a class="links-nav m-2" target="_blank" href="${html_url}">GitHub</a>
-              <i class="fas fa-rss"></i> <a class="links-nav m-2" target="_blank" href="https://${blog}">Blog</a>
+              <i class="fas fa-location-arrow"></i> <a class="links-nav m-2" target="_blank" href="locationURL">Nashville,TN</a>
+              <i class="fab fa-github-alt"></i> <a class="links-nav m-2" target="_blank" href="https://github.com/JamieKook">GitHub</a>
+              <i class="fas fa-rss"></i> <a class="links-nav m-2" target="_blank" href="https://jamiekook.github.io">Blog</a>
             </div>
           </div>
         <div class= "main container text-center">
-        <h2>${bio}</h2>
+        <h2>Web Developer coming from a background in science education and research. Skilled in HTML, CSS, Javascript, jQuery, AJAX, and more. </h2>
         <div class= "row d-flex justify-content-around">
           <div class="col-md-5 mx-0 my-1 card">
             <h2>Public Repositories</h2>
-            <h3>${public_repos}</h3>
+            <h3>16</h3>
           </div>
           <div class="col-md-5 mx-0 my-1 card">
             <h2>Followers</h2>
-            <h3>${followers}</h3>
+            <h3>5</h3>
           </div>
         </div>
         <div class= "row d-flex justify-content-around">
             <div class="col-md-5 mx-0 my-1 card">
             <h2>GitHub Stars</h2>
-            <h3>${stars}</h3>
+            <h3>2</h3>
           </div>
           <div class="col-md-5 mx-0 my-1 card">
             <h2>Following</h2>
-            <h3>${following}</h3>
+            <h3>5</h3>
           </div>
           </div>
       </div>
       <div class="wrapper bottom"></div>
   
-      </body>`
-        }
-
-module.exports= {
-  colors: colors,
-  generateHTML: generateHTML
-}
+      </body>

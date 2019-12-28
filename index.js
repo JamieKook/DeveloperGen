@@ -1,16 +1,11 @@
 const inquirer = require("inquirer");
 const generateHTML = require("./generateHTML.js"); 
 const axios= require("axios"); 
-
 const fs= require("fs"),
   convertFactory= require("electron-html-to"); 
-
- 
 const conversion = convertFactory({
   converterPath: convertFactory.converters.PDF
 }); 
-
-// const pdf= require("html-pdf"); 
 
 // //enter your googleAPI account here:
 // const googleAPI="";  
@@ -64,7 +59,7 @@ inquirer
             stars=res.data.length;
             // const locationUrl= `https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=14&size=400x400&key=${googleAPI}`; 
             const htmlData= generateHTML.generateHTML(data,imageUrl,location, html_url, blog, name, bio, public_repos, followers, stars, following);
-            conversion({html: htmlData}, function(err, result){
+            conversion({html: htmlData, delay: 1000}, function(err, result){
                 if (err){
                   return console.log(err); 
                 } 
@@ -73,14 +68,14 @@ inquirer
                 result.stream.pipe(fs.createWriteStream(username+".pdf"));
                 conversion.kill(); 
                 });
-            fs.writeFile(username+".html", htmlData, function(err){
-              if (err){
-                console.log(err);
-              } else{
-                console.log("success"); 
-                const htmlFile= fs.readFileSync(username+".html", "utf8");
-              }
-            });       
+              fs.writeFile(username+".html", htmlData, function(err){
+                if (err){
+                  console.log(err);
+                } else{
+                  console.log("success"); 
+                  const htmlFile= fs.readFileSync(username+".html", "utf8");
+                }
+              });       
           }); 
       });
   }) 

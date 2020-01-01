@@ -28,6 +28,7 @@ let lat= null;
 let lng= null; 
 
 inquirer
+//gather userinput of github name and color scheme
   .prompt([
     {
       type: "input",
@@ -41,12 +42,15 @@ inquirer
       name: "color"
     }
   ])
+  //Call to Github using username
   .then(function(response){
     username= response.username;
     data= response; 
     queryUrl = `https://api.github.com/users/${username}`;
     return axios.get(queryUrl);
   })
+  //setting global variables to information gathered from github
+  //also makes an api call to google geocoding to get lat and lng 
   .then(function(res){
     imageUrl= res.data.avatar_url; 
     location= res.data.location; 
@@ -60,11 +64,14 @@ inquirer
     const geolocateurl= `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${googleAPI}`;
     return axios.get(geolocateurl);
   })
+  //storing response as lat and lng
+  //makes api call to github to get number of starred repositories
   .then(function(response){
     lat= response.data.results[0].geometry.location.lat;
     lng= response.data.results[0].geometry.location.lng;
     return axios.get(queryUrl+"/starred");
   })
+  //Saves stars, gets google maps url, generates html, and converts to pdf
   .then(function(res){
     stars=res.data.length;
     const locationUrl= `https://www.google.com/maps/@?api=1&map_action=map&center=${lat},${lng}&zoom=14`;
